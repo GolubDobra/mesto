@@ -1,4 +1,4 @@
-.form-enable__title {
+.form__title {
    margin: 34px 0 0;
    padding: 0;
    color: #000;
@@ -10,7 +10,7 @@
 }
 
 @media screen and (max-width: 880px) {
-   .form-enable__title {
+   .form__title {
       margin: 25px 0 0;
       font-size: 18px;
       line-height: 22px;

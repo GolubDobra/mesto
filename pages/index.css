@@ -11,7 +11,7 @@
 @import url(../blocks/profile/__avatar/profile__avatar.css);
 @import url(../blocks/profile/__profile-info/profile__profile-info.css);
 @import url(../blocks/profile/__add-button/profile__add-button.css);
-@import url(../blocks/profile/__add-button/__plus/add-button__plus.css);
+@import url(../blocks/profile//__plus/profile__plus.css);
 @import url(../blocks/profile/__description/profile__description.css);
 @import url(../blocks/profile/__name/profile__name.css);
 @import url(../blocks/profile/__edit-button/profile__edit-button.css);
@@ -20,16 +20,16 @@
 @import url(../blocks/elements/__card/elements__card.css);
 @import url(../blocks/elements/__card-name/elements__card-name.css);
 @import url(../blocks/elements/__card-image/elements__card-image.css);
-@import url(../blocks/elements/__card_name-wrapper/elements__card_name-wrapper.css);
+@import url(../blocks/elements/__name-wrapper/elements__name-wrapper.css);
 @import url(../blocks/elements/__card-like/elements__card-like.css);
 @import url(../blocks/elements/__card_like-enable/elements__card_like-enable.css);
 
-@import url(../blocks/form-enable/__dark-background/form-enable__dark-background.css);
+@import url(../blocks/form/__dark/form__dark.css);
 @import url(../blocks/form-enable/form-enable.css);
-@import url(../blocks/form-enable/__title/form-enable__title.css);
-@import url(../blocks/form-enable/__save-btn/form-enable__save-btn.css);
-@import url(../blocks/form-enable/__input/form-enable__input.css);
-@import url(../blocks/form-enable/__hidden-btn/form-enable__hidden-btn.css);
+@import url(../blocks/form/__title/form__title.css);
+@import url(../blocks/form/__save-btn/form__save-btn.css);
+@import url(../blocks/form/__input/form__input.css);
+@import url(../blocks/form/__hidden-btn/form__hidden-btn.css);
 
 @import url(../blocks/form/form.css);
 
