@@ -1,0 +1,11 @@
+.elements__card_like-enable {
+   background-color: #fff;
+   border-style: none;
+   margin-right: 30px;
+   width: 22px;
+   height: 20px;
+   background-image: url('../../../images/like-enable.svg');
+   background-repeat: no-repeat;
+   user-select: none;
+   outline: none;
+}

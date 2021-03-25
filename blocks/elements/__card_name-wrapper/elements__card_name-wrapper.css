@@ -1,0 +1,9 @@
+.elements__card_name-wrapper {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: baseline;
+   padding: 25px 0 31px 0;
+   background-color: #fff;
+   border-radius: 0px 0px 10px 10px;
+}
