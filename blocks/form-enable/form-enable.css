@@ -1,11 +1,12 @@
 .form-enable {
    display: flex;
    flex-direction: column;
-   -webkit-transform: translate(-50%, -50%);
-   transform: translate(-50%, -50%);
-   position: absolute;
+   position: relative;
+   /* -webkit-transform: translate(-50%, -50%);
+   transform: translate(-50%, -50%); */
+   /* position: absolute;
    left: 50%;
-   top: 50%;
+   top: 50%; */
    width: 430px;
    height: 335px;
    background-color: #fff;
