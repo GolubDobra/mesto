@@ -7,8 +7,8 @@ let profileContainer = document.querySelector('.profile');
 let profileDescriptions = profileContainer.querySelector('.profile__description');
 let profileName = profileContainer.querySelector('.profile__name');
 
-let inputName = popupInput.querySelector('.popup__input_type_name');
-let inputDescriptions = popupInput.querySelector('.popup__input_type_descriptions');
+let inputName = popup.querySelector('.popup__input_type_name');
+let inputDescriptions = popup.querySelector('.popup__input_type_descriptions');
 
 
 popup.addEventListener('submit', function (evt) {

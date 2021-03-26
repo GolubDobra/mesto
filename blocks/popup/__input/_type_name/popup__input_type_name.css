@@ -1,6 +1,6 @@
 .popup__input_type_name {
    width: 358px;
-   margin: 0 auto;
+   margin: 54px auto 0;
    line-height: 24px;
    border: 0 solid #fff;
    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -13,6 +13,7 @@
    .popup__input_type_name {
       width: 238px;
       height: 22px;
+      margin: 75px auto 0;
       
    }
 }
