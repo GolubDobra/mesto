@@ -3,8 +3,8 @@
    font-style: normal;
    font-weight: 500;
    font-display: swap;
-   src: url("../fonts/inter-500.woff") format('woff');
-   src: url("../fonts/inter-500.woff2") format('woff2');
+   src: url("inter-500.woff") format('woff');
+   src: url("inter-500.woff2") format('woff2');
 
 }
 

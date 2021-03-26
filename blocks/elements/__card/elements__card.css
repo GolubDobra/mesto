@@ -11,7 +11,7 @@
    margin-right: 0px;
 }
 
-.elements__card>img {
+.elements__card>.elements__card-image {
    width: 100%;
    height: auto;
 }

@@ -1,7 +1,7 @@
 .elements__card-like {
    background-color: #fff;
    border-style: none;
-   margin-right: 30px;
+   margin-right: 5px;
    width: 22px;
    height: 20px;
    background-image: url('../../../images/like.svg');
@@ -13,3 +13,4 @@
 .elements__card-like:hover {
    opacity: 0.5;
 }
+

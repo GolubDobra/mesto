@@ -3,11 +3,16 @@
    flex-direction: column;
    align-items: start;
    max-width: 880px;
-   margin: 66px auto 0;
+   margin: 45px auto 0;
+   height: 74px;
+   /* margin: auto; */
+
+   border-bottom: 1px solid #545454;
 }
 
 @media screen and (max-width: 880px) {
    .header {
+      height: 56px;
       width: 100%;
       margin: 28px auto 0;
    }

@@ -5,6 +5,11 @@
    font-weight: 500;
    font-size: 42px;
    align-self: stretch;
+   max-width: 440px;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   overflow: hidden;
+   /* max-width: 520px; */
    grid-area: name;
 }
 
@@ -12,5 +17,7 @@
    .profile__name {
       font-size: 27px;
       justify-self: center;
+      max-width: 230px;
+
    }
 }

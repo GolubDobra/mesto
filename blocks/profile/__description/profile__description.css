@@ -5,6 +5,10 @@
    font-size: 18px;
    line-height: 22px;
    align-self: stretch;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   overflow: hidden;
+   max-width: 440px;
    grid-area: description;
 }
 
@@ -12,5 +16,7 @@
    .profile__description {
       justify-self: center;
       font-size: 14px;
+      max-width: 230px;
+
    }
 }
