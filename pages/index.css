@@ -21,6 +21,7 @@
 @import url(../blocks/elements/__name-wrapper/elements__name-wrapper.css);
 @import url(../blocks/elements/__card-like/elements__card-like.css);
 
+@import url(../blocks//popup/popup.css);
 @import url(../blocks//popup/__dark/popup__dark.css);
 @import url(../blocks/popup/__open/popup__open.css);
 @import url(../blocks/popup/__save-btn/popup__save-btn.css);
