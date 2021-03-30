@@ -1,7 +1,5 @@
 .popup__hidden-btn {
-   position: absolute;
-   bottom: 100%;
-   left: 100%;
+   margin-left: 470px;   
    height: 40px;
    width: 40px;
    transform: rotate(45deg);
@@ -12,10 +10,8 @@
    border-style: none;
    background-image: url('../../../images/plus.svg');
    background-position: center;
-   /* background-repeat: no-repeat; */
    background-size: contain;
    background-color: rgba(0, 0, 0, 0);
-   /* user-select: none; */
 }
 
 .popup__hidden-btn:hover {
@@ -24,6 +20,8 @@
 
 @media screen and (max-width: 880px) {
    .popup__hidden-btn {
+      margin-left: 260px;
+      margin-bottom: 13.5px;
       bottom: 105%;
       left: 90%;
       height: 26px;

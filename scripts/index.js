@@ -1,6 +1,5 @@
 let popupContainer = document.querySelector('.popup');
 let popup = popupContainer.querySelector('.popup__container');
-let popupInput = popup.querySelector('.popup__input');
 
 let root = document.querySelector('.root');
 let profileContainer = document.querySelector('.profile');
@@ -16,16 +15,13 @@ popup.addEventListener('submit', function (evt) {
    profileName.textContent = inputName.value;
    profileDescriptions.textContent = inputDescriptions.value;
    
-   popupContainer.classList.remove('popup__dark');
-   popup.classList.remove('popup__open');
-   root.removeAttribute('style');
+   closepopup();
 }); 
 
 let editBtn = document.querySelector('.profile__edit-button');
 
 function openpopup() {
-   popup.classList.add('popup__open');
-   popupContainer.classList.add('popup__dark');
+   popupContainer.classList.add('popup_opened');
 
    root.setAttribute('style', 'overflow: hidden');
 
@@ -39,32 +35,9 @@ editBtn.addEventListener('click', openpopup);
 let closeBtn = document.querySelector('.popup__hidden-btn');
 
 function closepopup() {   
-   popupContainer.classList.toggle('popup__dark');
-   popup.classList.remove('popup__open');
+   popupContainer.classList.remove('popup_opened');
 
    root.removeAttribute('style');
 }
 
 closeBtn.addEventListener('click', closepopup);
-
-
-
-
-// let saveBtn = document.querySelector('.popup__save-btn');
-
-// function saveChanges(evt) {
-//    evt.preventDefault();
-  
-//    profileName.textContent = inputName.value;
-//    profileDescriptions.textContent = inputDescriptions.value;
-   
-//    // popupContainer.classList.toggle('popup');
-//    popupContainer.classList.remove('popup__dark');
-//    popup.classList.remove('popup__open');
-//    // popup.classList.add('popup__container');
-   
-   
-//    console.log(profileName.textContent);
-// }
-
-// saveBtn.addEventListener('submit', saveChanges, true);

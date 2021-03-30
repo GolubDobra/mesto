@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html>
-    <head lang="ru">
+<html lang="ru">
+    <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="pages/index.css" />
@@ -103,15 +103,15 @@
       </footer>
 
       <section class="popup">
-         <form class="popup__container" name="form" action="#">
-          <button type="reset" class="popup__hidden-btn"></button>
-          <h2 class="popup__title">Редактировать профиль</h2>
-          <!-- <div class="popup__input"></div> -->
-             <input name="name" type="text" placeholder="Имя" class="popup__input popup__input_type_name">
-             <input name="descriptions" type="text" placeholder="Описание" class="popup__input popup__input_type_descriptions">
-          <!-- </div> -->
-          <button type="submit" class="popup__save-btn">Сохранить</button>
-         </form>
+         <div class="popup__container">
+            <button type="button" class="popup__hidden-btn"></button>
+            <form class="popup__form" name="form" action="#">
+               <h2 class="popup__title">Редактировать профиль</h2>
+               <input name="name" type="text" placeholder="Имя" class="popup__input popup__input_type_name">
+               <input name="descriptions" type="text" placeholder="Описание" class="popup__input popup__input_type_descriptions">
+            <button type="submit" class="popup__save-btn">Сохранить</button>
+            </form>
+         </div>
       </section>
 
       <script src="./scripts/index.js"></script>
