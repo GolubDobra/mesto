@@ -16,18 +16,22 @@
 
 @import url(../blocks/elements/elements.css);
 @import url(../blocks/elements/__card/elements__card.css);
+@import url(../blocks/elements/__trash-button/elements__trash-button.css);
 @import url(../blocks/elements/__card-name/elements__card-name.css);
 @import url(../blocks/elements/__card-image/elements__card-image.css);
 @import url(../blocks/elements/__name-wrapper/elements__name-wrapper.css);
 @import url(../blocks/elements/__card-like/elements__card-like.css);
+@import url(../blocks/elements/__card-like/_active/elements__card-like_active.css);
 
 @import url(../blocks//popup/popup.css);
+@import url(../blocks//popup/__gallery/popup__gallery.css);
+@import url(../blocks//popup/__image/popup__image.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
+@import url(../blocks/popup/_open-image/popup_open-image.css);
 @import url(../blocks/popup/__save-btn/popup__save-btn.css);
 @import url(../blocks/popup/__input/popup__input.css);
 @import url(../blocks/popup/__title/popup__title.css);
 @import url(../blocks/popup/__hidden-btn/popup__hidden-btn.css);
-
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__form/popup__form.css);
 

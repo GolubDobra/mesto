@@ -10,9 +10,9 @@
    outline: none;
 }
 
-.elements__card-like:active {
+/* .elements__card-like:active {
    background-image: url('../../../images/like-enable.svg');
-}
+} */
 
 .elements__card-like:hover {
    opacity: 0.5;
