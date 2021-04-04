@@ -101,7 +101,7 @@ const initialCards = [
  // удаления определенной карточки и раскрытия картинки на полный экран
  const initialCardsFunc = (initialCards) => {
    removeCards();
-   
+
    initialCards.forEach(function (element, index, arr) {
       const cloneElemsTemplate = elementsTemplate.cloneNode(true);
       
@@ -117,7 +117,7 @@ const initialCards = [
 
       // Удаление карточки пользователем
       cloneElemsTemplate.querySelector('.elements__trash-button').addEventListener('click', function (evt) {
-         arr.splice(index, 1);
+         delete arr[index]; //arr.splice(index, 1);
          evt.target.parentElement.remove();
       });
 
@@ -129,8 +129,7 @@ const initialCards = [
       });
       elements.append(cloneElemsTemplate);
    })
-   
-   
+   initialCards.filter((e) => e !== undefined);   
 }
 
 // Элементы для манипуляций с карточками
