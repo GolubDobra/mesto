@@ -13,7 +13,7 @@
 * HTML
 
 
-**Figma**
+**GitHub Page**
 
 * [Ссылка на GitHub Page](https://golubdobra.github.io/mesto/)
 
