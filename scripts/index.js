@@ -12,40 +12,22 @@ const profileName = profileContainer.querySelector('.profile__name');
 const inputName = popupForm.querySelector('.popup__input_type_name');
 const inputDescriptions = popupForm.querySelector('.popup__input_type_descriptions');
 
-// Кнопка "Сохранить" для редактирования профиля
-popupForm.addEventListener('submit', (evt) => {
-   evt.preventDefault();
-   profileName.textContent = inputName.value;
-   profileDescriptions.textContent = inputDescriptions.value;
-   
-   closePopupEditor();
-}); 
+// Элементы для манипуляций с карточками
+const popupAddCard = document.querySelector('.popup_add-card');
+const popupCntnr = popupAddCard.querySelector('.popup__container');
+const popupFormAddCard = popupCntnr.querySelector('.popup__form_add-card');
+
+const inputTitle = popupFormAddCard.querySelector('.popup__input_type_card-title');
+const inputUrl = popupFormAddCard.querySelector('.popup__input_type_card-url');
+
+// Открытие формы для добавления карточки
+const addBtn = document.querySelector('.profile__add-button');
 
 // Открытие формы для редактирования профиля
 const editBtn = document.querySelector('.profile__edit-button');
 
-const openPopupEditor = () => {
-   openPopup(popupEditProfile);
-   // popupEditProfile.classList.add('popup_opened');
-
-   // root.setAttribute('style', 'overflow: hidden');
-
-   inputName.value = profileName.textContent;
-   inputDescriptions.value = profileDescriptions.textContent;
-};
-
-editBtn.addEventListener('click', openPopupEditor);
-
 // Закрытие формы для редактирования профиля
 const closeBtnForEditProfile = document.querySelector('.popup__hidden-btn_edit-profile');
-
-const closePopupEditor = () => {   
-   closePopup(popupEditProfile);
-}
-
-closeBtnForEditProfile.addEventListener('click', closePopupEditor);
-
-// 5 проектная работа
 
 // Элементы для добавления карточек
 const elements = document.querySelector('.elements');
@@ -77,6 +59,47 @@ const initialCards = [
    }
  ];
 
+ // Закрытие формы для добавления карточки
+const closeBtnForAddCard = document.querySelector('.popup__hidden-btn_add-card');
+
+// Закрытие картинки, развернутой на полный экран
+const openFullImage = document.querySelector('.popup_open-image');
+const closeBtnForFullImage = document.querySelector('.popup__hidden-btn_image');
+
+const fullImage = openFullImage.querySelector('.popup__image');
+const fullImageName = openFullImage.querySelector('.popup__name');
+
+let cardsForRemove = elements.querySelectorAll('.elements__card');
+
+// Кнопка "Сохранить" для редактирования профиля
+popupForm.addEventListener('submit', (evt) => {
+   evt.preventDefault();
+   profileName.textContent = inputName.value;
+   profileDescriptions.textContent = inputDescriptions.value;
+   
+   closePopupEditor();
+}); 
+
+const openPopupEditor = () => {
+   openPopup(popupEditProfile);
+   // popupEditProfile.classList.add('popup_opened');
+
+   // root.setAttribute('style', 'overflow: hidden');
+
+   inputName.value = profileName.textContent;
+   inputDescriptions.value = profileDescriptions.textContent;
+};
+
+editBtn.addEventListener('click', openPopupEditor);
+
+const closePopupEditor = () => {   
+   closePopup(popupEditProfile);
+}
+
+closeBtnForEditProfile.addEventListener('click', closePopupEditor);
+
+// 5 проектная работа
+
  const openPopup = (element) => {
    element.classList.add('popup_opened');
    root.setAttribute('style', 'overflow: hidden');
@@ -87,24 +110,12 @@ const initialCards = [
    root.removeAttribute('style');
  }
 
- // Удаление карточек
- const removeCards = () => {
-   const cardsForRemove = elements.querySelectorAll('.elements__card');
-   if(cardsForRemove.length !== 0) {
-      cardsForRemove.forEach((elem) => {
-         elem.remove();
-      })
-   }
- }
-
  // Добавление карточек, реализация функциональности для лайков, 
  // удаления определенной карточки и раскрытия картинки на полный экран
  const renderInitialCards = (initialCards) => {
-   removeCards();
    initialCards.forEach(function (element) {
-      addCard(true, elements, element);
-   })
-   initialCards.filter((e) => e !== undefined);   
+      addCard(true, element);
+   }) 
 }
 
 const createCard = (element) => {
@@ -113,6 +124,7 @@ const createCard = (element) => {
       const cardLike = cloneElemsTemplate.querySelector('.elements__card-like');
       const cardTrashBtn = cloneElemsTemplate.querySelector('.elements__trash-button');
       const cardImage  =  cloneElemsTemplate.querySelector('.elements__card-image');
+      
       // Добавление карточки
       cardName.textContent = element.name;
       cardName.alt = element.name;
@@ -131,32 +143,22 @@ const createCard = (element) => {
       // Раскрытие картинки на весь экран
       cardImage.addEventListener('click', function (evt) {
          openPopup(openFullImage);
-         openFullImage.querySelector('.popup__image').src = element.link;
-         openFullImage.querySelector('.popup__name').textContent = element.name;
-         openFullImage.querySelector('.popup__name').alt = element.name;
+         fullImage.src = element.link;
+         fullImageName.textContent = element.name;
+         fullImageName.alt = element.name;
       });
       return cloneElemsTemplate;
 }
 
-const addCard = (isAppend, elem, element) => {
-   if(isAppend){
-      elem.append(createCard(element));
+const addCard = (isAppend, element) => {
+   cardsForRemove = elements.querySelectorAll('.elements__card');
+   if(!isAppend && cardsForRemove.length !== 0){
+      cardsForRemove[0].before(createCard(element));
    } else {
-      elem.before(createCard(element));
+      elements.append(createCard(element));
    }
    
 }
-
-// Элементы для манипуляций с карточками
-const popupAddCard = document.querySelector('.popup_add-card');
-const popupCntnr = popupAddCard.querySelector('.popup__container');
-const popupFormAddCard = popupCntnr.querySelector('.popup__form_add-card');
-
-const inputTitle = popupFormAddCard.querySelector('.popup__input_type_card-title');
-const inputUrl = popupFormAddCard.querySelector('.popup__input_type_card-url');
-
-// Открытие формы для добавления карточки
-const addBtn = document.querySelector('.profile__add-button');
 
 function openPopupForAddCard() {
    inputTitle.value = '';
@@ -165,9 +167,6 @@ function openPopupForAddCard() {
 };
 
 addBtn.addEventListener('click', openPopupForAddCard);
-
-// Закрытие формы для добавления карточки
-const closeBtnForAddCard = document.querySelector('.popup__hidden-btn_add-card');
 
 function closePopupForAddCard() {   
    closePopup(popupAddCard)
@@ -178,21 +177,15 @@ closeBtnForAddCard.addEventListener('click', closePopupForAddCard);
 // Добавление в массив элемент новой карточки
 popupFormAddCard.addEventListener('submit', function (evt) {
    evt.preventDefault();
-   const cardsForRemove = elements.querySelectorAll('.elements__card'); 
-   initialCards.unshift({
+   const card = {
       name: inputTitle.value,
       link: inputUrl.value,
-    });
+    };
    closePopupForAddCard();
-   createCard(initialCards[0]);
-   addCard(false, cardsForRemove[0], initialCards[0]);
+   addCard(false, card);
 }); 
 
 renderInitialCards(initialCards);
-
-// Закрытие картинки, развернутой на полный экран
-const openFullImage = document.querySelector('.popup_open-image');
-const closeBtnForFullImage = document.querySelector('.popup__hidden-btn_image');
 
 function closePopupForFullImage() {   
    closePopup(openFullImage);
