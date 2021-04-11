@@ -153,7 +153,7 @@ const createCard = (element) => {
 const addCard = (isAppend, element) => {
    cardsForRemove = elements.querySelectorAll('.elements__card');
    if(!isAppend && cardsForRemove.length !== 0){
-      cardsForRemove[0].before(createCard(element));
+      elements.prepend(createCard(element));
    } else {
       elements.append(createCard(element));
    }
