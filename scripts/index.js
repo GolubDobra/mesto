@@ -69,8 +69,6 @@ const closeBtnForFullImage = document.querySelector('.popup__hidden-btn_image');
 const fullImage = openFullImage.querySelector('.popup__image');
 const fullImageName = openFullImage.querySelector('.popup__name');
 
-let cardsForRemove = elements.querySelectorAll('.elements__card');
-
 // Кнопка "Сохранить" для редактирования профиля
 popupForm.addEventListener('submit', (evt) => {
    evt.preventDefault();
@@ -151,8 +149,7 @@ const createCard = (element) => {
 }
 
 const addCard = (isAppend, element) => {
-   cardsForRemove = elements.querySelectorAll('.elements__card');
-   if(!isAppend && cardsForRemove.length !== 0){
+   if(!isAppend){
       elements.prepend(createCard(element));
    } else {
       elements.append(createCard(element));
