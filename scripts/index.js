@@ -58,6 +58,7 @@ const openPopupEditor = () => {
   const ableBtn = popupEditProfile.querySelector(validationConfig.submitButtonSelector);
   ableBtn.disabled = false;
   ableBtn.classList.remove(validationConfig.inactiveButtonClass);
+  clearValidation(validationConfig.inputSelector, 'popup__input_type_error');
   openPopup(popupEditProfile);
   inputName.value = profileName.textContent;
   inputDescriptions.value = profileDescriptions.textContent;
@@ -73,13 +74,16 @@ closeBtnForEditProfile.addEventListener('click', closePopupEditor);
 
 // 5 проектная работа
 
-const openPopup = (element) => {
+const clearValidation = (inputSelector, inputSelectorClass) => {
   document.querySelectorAll('.popup__input-error').forEach((item) => {
     item.textContent = '';
   });
-  document.querySelectorAll(validationConfig.inputSelector).forEach((item) => {
-    item.classList.remove('popup__input_type_error');
+  document.querySelectorAll(inputSelector).forEach((item) => {
+    item.classList.remove(inputSelectorClass);
   });
+};
+
+const openPopup = (element) => {
   document.addEventListener('keydown', closePopupByEsc);
   element.addEventListener('click', closePopupByOverlay);
   element.classList.add('popup_opened');
@@ -161,7 +165,7 @@ const openPopupForAddCard = () => {
   //     'popup__input-error_active',
   //   );
   // });
-
+  clearValidation(validationConfig.inputSelector, 'popup__input_type_error');
   openPopup(popupAddCard);
 };
 
