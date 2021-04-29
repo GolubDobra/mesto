@@ -54,6 +54,13 @@ const validationConfig = {
   errorClass: 'popup__input-error_active',
 };
 
+// 7 проектная работа
+let validationEditCard;
+Array.from(document.querySelectorAll(validationConfig.formSelector)).forEach((formElement) => {
+  validationEditCard = new FormValidator(validationConfig, formElement);
+  validationEditCard.enableValidation();
+});
+
 // Кнопка "Сохранить" для редактирования профиля
 popupForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
@@ -63,10 +70,8 @@ popupForm.addEventListener('submit', (evt) => {
 });
 
 const openPopupEditor = () => {
-  const ableBtn = popupEditProfile.querySelector(validationConfig.submitButtonSelector);
-  ableBtn.disabled = false;
-  ableBtn.classList.remove(validationConfig.inactiveButtonClass);
-  clearValidation(validationConfig.inputSelector, 'popup__input_type_error');
+  validationEditCard.ableSubmitButton();
+  validationEditCard.clearValidation();
   openPopup(popupEditProfile);
   inputName.value = profileName.textContent;
   inputDescriptions.value = profileDescriptions.textContent;
@@ -81,16 +86,6 @@ const closePopupEditor = () => {
 closeBtnForEditProfile.addEventListener('click', closePopupEditor);
 
 // 5 проектная работа
-
-const clearValidation = (inputSelector, inputSelectorClass) => {
-  document.querySelectorAll('.popup__input-error').forEach((item) => {
-    item.textContent = '';
-  });
-  document.querySelectorAll(inputSelector).forEach((item) => {
-    item.classList.remove(inputSelectorClass);
-  });
-};
-
 export const openPopup = (element) => {
   document.addEventListener('keydown', closePopupByEsc);
   element.addEventListener('click', closePopupByOverlay);
@@ -109,12 +104,15 @@ const closePopup = (element) => {
 // удаления определенной карточки и раскрытия картинки на полный экран
 const renderInitialCards = (initialCards) => {
   initialCards.forEach((element) => {
-    const card = new Card(element, '.elements__template');
-    const cardElement = card.generateCard();
+    const cardElement = createCard(element);
 
     // Добавляем в DOM
     addCard(true, cardElement);
   });
+};
+const createCard = (element) => {
+  const card = new Card(element, '.elements__template');
+  return card.generateCard();
 };
 
 const addCard = (isAppend, element) => {
@@ -128,10 +126,8 @@ const addCard = (isAppend, element) => {
 const openPopupForAddCard = () => {
   inputTitle.value = '';
   inputUrl.value = '';
-  const disableBtn = popupFormAddCard.querySelector(validationConfig.submitButtonSelector);
-  disableBtn.disabled = true;
-  disableBtn.classList.add(validationConfig.inactiveButtonClass);
-  clearValidation(validationConfig.inputSelector, 'popup__input_type_error');
+  validationEditCard.disableSubmitButton();
+  validationEditCard.clearValidation();
   openPopup(popupAddCard);
 };
 
@@ -150,8 +146,9 @@ popupFormAddCard.addEventListener('submit', function (evt) {
     name: inputTitle.value,
     link: inputUrl.value,
   };
-  const card = new Card(elemCard, '.elements__template');
-  const cardElement = card.generateCard();
+
+  const cardElement = createCard(elemCard);
+
   closePopupForAddCard();
   addCard(false, cardElement);
 });
@@ -159,14 +156,16 @@ popupFormAddCard.addEventListener('submit', function (evt) {
 renderInitialCards(initialCards);
 
 const closePopupForFullImage = () => {
-  closePopup(openFullImage);
+  if (evt.target.contains('popup_opened')) {
+    closePopup(evt.target);
+  }
 };
 
 closeBtnForFullImage.addEventListener('click', closePopupForFullImage);
 
 // 6 проектная работа
-const artistInput = document.querySelector('.input__text_type_artist');
-const titleInput = document.querySelector('.input__text_type_title');
+// const artistInput = document.querySelector('.input__text_type_artist');
+// const titleInput = document.querySelector('.input__text_type_title');
 
 const closePopupByEsc = (evt) => {
   if (evt.key === 'Escape') {
@@ -182,7 +181,3 @@ const closePopupByOverlay = (evt) => {
 const closeOpenedPopup = (elem) => {
   closePopup(elem);
 };
-
-// 7 проектная работа
-const validationEditCard = new FormValidator(validationConfig);
-validationEditCard.enableValidation();

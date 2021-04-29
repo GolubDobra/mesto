@@ -1,6 +1,6 @@
 import { openPopup } from './index.js';
-// класс для создания карточек
 
+// класс для создания карточек
 const openFullImage = document.querySelector('.popup_open-image');
 const fullImage = openFullImage.querySelector('.popup__image');
 const fullImageName = openFullImage.querySelector('.popup__name');
@@ -15,7 +15,6 @@ export class Card {
     const cardElement = document.querySelector(this._templateSelector).content.cloneNode(true);
     return cardElement;
   }
-  // document.querySelector('.elements__template').content.cloneNode(true);
   generateCard() {
     this._element = this._getTemplate();
 
@@ -29,7 +28,6 @@ export class Card {
 
   // Добавление/удаление лайка карточке
   _setEventListeners(elem) {
-    // this._element = this._getTemplate();
     elem.querySelector('.elements__card-like').addEventListener('click', (evt) => {
       evt.target.classList.toggle('elements__card-like_active');
     });
