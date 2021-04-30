@@ -156,9 +156,7 @@ popupFormAddCard.addEventListener('submit', function (evt) {
 renderInitialCards(initialCards);
 
 const closePopupForFullImage = () => {
-  if (evt.target.contains('popup_opened')) {
-    closePopup(evt.target);
-  }
+  closePopup(openFullImage);
 };
 
 closeBtnForFullImage.addEventListener('click', closePopupForFullImage);
@@ -175,7 +173,9 @@ const closePopupByEsc = (evt) => {
 };
 
 const closePopupByOverlay = (evt) => {
-  closePopup(evt.target);
+  if (evt.target.classList.contains('popup_opened')) {
+    closePopup(evt.target);
+  }
 };
 
 const closeOpenedPopup = (elem) => {
