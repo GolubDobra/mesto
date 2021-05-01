@@ -86,11 +86,12 @@ export class FormValidator {
   }
 
   clearValidation = () => {
-    document.querySelectorAll('.popup__input-error').forEach((item) => {
-      item.textContent = '';
-    });
-    document.querySelectorAll(this._inputSelector).forEach((item) => {
-      item.classList.remove(this._inputErrorClass);
-    });
+    this._inputList.forEach((input) => this._hideInputError(input));
+    //   document.querySelectorAll('.popup__input-error').forEach((item) => {
+    //     item.textContent = '';
+    //   });
+    //   document.querySelectorAll(this._inputSelector).forEach((item) => {
+    //     item.classList.remove(this._inputErrorClass);
+    //   });
   };
 }

@@ -21,6 +21,7 @@ const popupAddCard = document.querySelector('.popup_add-card');
 
 const popupCntnr = popupAddCard.querySelector('.popup__container');
 const popupFormAddCard = popupCntnr.querySelector('.popup__form_add-card');
+const popupFormEditProfile = document.querySelector('.popup__form_edit-profile');
 
 const inputTitle = popupFormAddCard.querySelector('.popup__input_type_card-title');
 const inputUrl = popupFormAddCard.querySelector('.popup__input_type_card-url');
@@ -55,11 +56,10 @@ const validationConfig = {
 };
 
 // 7 проектная работа
-let validationEditCard;
-Array.from(document.querySelectorAll(validationConfig.formSelector)).forEach((formElement) => {
-  validationEditCard = new FormValidator(validationConfig, formElement);
-  validationEditCard.enableValidation();
-});
+const validationAddCard = new FormValidator(validationConfig, popupFormAddCard);
+validationAddCard.enableValidation();
+const validationEditCard = new FormValidator(validationConfig, popupFormEditProfile);
+validationEditCard.enableValidation();
 
 // Кнопка "Сохранить" для редактирования профиля
 popupForm.addEventListener('submit', (evt) => {
@@ -72,6 +72,9 @@ popupForm.addEventListener('submit', (evt) => {
 const openPopupEditor = () => {
   validationEditCard.ableSubmitButton();
   validationEditCard.clearValidation();
+  validationAddCard.ableSubmitButton();
+  validationAddCard.clearValidation();
+
   openPopup(popupEditProfile);
   inputName.value = profileName.textContent;
   inputDescriptions.value = profileDescriptions.textContent;
@@ -128,6 +131,8 @@ const openPopupForAddCard = () => {
   inputUrl.value = '';
   validationEditCard.disableSubmitButton();
   validationEditCard.clearValidation();
+  validationAddCard.disableSubmitButton();
+  validationAddCard.clearValidation();
   openPopup(popupAddCard);
 };
 
