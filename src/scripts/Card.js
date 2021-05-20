@@ -1,9 +1,6 @@
 // import { openPopup } from './index.js';
 
 // класс для создания карточек
-const openFullImage = document.querySelector('.popup_open-image');
-const fullImage = openFullImage.querySelector('.popup__image');
-const fullImageName = openFullImage.querySelector('.popup__name');
 export class Card {
   constructor(element, templateSelector, { handleCardClick }) {
     this._name = element.cardName;

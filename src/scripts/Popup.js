@@ -31,7 +31,7 @@ export class Popup {
     this._popup.classList.remove('popup_opened');
     this._root.removeAttribute('style');
     document.removeEventListener('keydown', this._handleEscClose);
-    document.removeEventListener('click', this._handleOverlayClose);
+    this._popup.removeEventListener('click', this._handleOverlayClose);
   }
 
   // закрытие по крестику
