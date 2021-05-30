@@ -11,7 +11,7 @@ export class Api {
       if (res.ok) {
         return res.json();
       }
-      return Promise.reject(`ERROR: ${res.statusText}`);
+      return Promise.reject(`error: ${res.statusText}`);
     });
   }
 
@@ -22,11 +22,11 @@ export class Api {
       if (res.ok) {
         return res.json();
       }
-      return Promise.reject(`ERROR: ${res.statusText}`);
+      return Promise.reject(`error: ${res.statusText}`);
     });
   }
 
-  updateUserInfo({ name, status }) {
+  updateProfile({ name, status }) {
     return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
@@ -38,7 +38,7 @@ export class Api {
       if (res.ok) {
         return res.json();
       } else {
-        return Promise.reject(`ERROR: ${res.status}`);
+        return Promise.reject(`error: ${res.status}`);
       }
     });
   }
@@ -55,12 +55,12 @@ export class Api {
       if (res.ok) {
         return res.json();
       } else {
-        return Promise.reject(`ERROR: ${res.status}`);
+        return Promise.reject(`error: ${res.status}`);
       }
     });
   }
 
-  newAvatar(url) {
+  newPhotoAvatar(url) {
     return fetch(`${this._url}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
@@ -71,7 +71,7 @@ export class Api {
       if (res.ok) {
         return res.json();
       } else {
-        return Promise.reject(`ERROR: ${res.status}`);
+        return Promise.reject(`error: ${res.status}`);
       }
     });
   }
@@ -84,7 +84,7 @@ export class Api {
       if (res.ok) {
         return res.json();
       }
-      return Promise.reject(`Ошибка удаления карточки: ${res.statusText}`);
+      return Promise.reject(`error: ${res.statusText}`);
     });
   }
 
@@ -96,11 +96,11 @@ export class Api {
       if (res.ok) {
         return res.json();
       }
-      return Promise.reject(`ERROR: ${res.statusText}`);
+      return Promise.reject(`error: ${res.statusText}`);
     });
   }
 
-  likeCardCancel(id) {
+  delCardLike(id) {
     return fetch(`${this._url}/cards/likes/${id}`, {
       method: 'DELETE',
       headers: this._headers,
@@ -108,7 +108,7 @@ export class Api {
       if (res.ok) {
         return res.json();
       }
-      return Promise.reject(`ERROR: ${res.statusText}`);
+      return Promise.reject(`error: ${res.statusText}`);
     });
   }
 }

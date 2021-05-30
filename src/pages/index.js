@@ -127,7 +127,7 @@ const createCard = (dataCard) => {
           .catch((err) => console.log(err));
       } else {
         api
-          .likeCardCancel(dataCard._id)
+          .delCardLike(dataCard._id)
           .then((res) => {
             cardElement.querySelector(likeCounter).textContent = res.likes.length;
           })
@@ -170,7 +170,7 @@ const popupWithFormUser = new PopupWithForm({
   popupSubmit: (formValues, saveButton, initialText) => {
     loadingText(true, saveButton, initialText);
     api
-      .updateUserInfo({ name: formValues.name, status: formValues.status })
+      .updateProfile({ name: formValues.name, status: formValues.status })
       .then((userData) => {
         userInfo.setUserInfo(userData.name, userData.about);
         loadingText(false, saveButton, initialText);
@@ -185,7 +185,7 @@ const popupWithFormAvatar = new PopupWithForm({
   popupSubmit: (formValues, saveButton, initialText) => {
     loadingText(true, saveButton, initialText);
     api
-      .newAvatar(formValues.link)
+      .newPhotoAvatar(formValues.link)
       .then((res) => {
         userAvatar.src = res.avatar;
         loadingText(false, saveButton, initialText);
