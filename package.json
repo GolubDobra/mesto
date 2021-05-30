@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RexSatanas/mesto.git"
+    "url": "git+https://github.com/GolubDobra/mesto.git"
   },
-  "author": "Denis Myagotin",
+  "author": "Kolpakova Valeria",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/RexSatanas/mesto/issues"
+    "url": "https://github.com/GolubDobra/mesto/issues"
   },
-  "homepage": "https://github.com/RexSatanas/mesto#readme",
+  "homepage": "https://github.com/GolubDobra/mesto#readme",
   "devDependencies": {
     "@babel/core": "^7.14.0",
     "@babel/preset-env": "^7.14.1",
