@@ -6,30 +6,28 @@ export class PopupWithForm extends Popup {
     this._popupSelector = popupSelector;
     this._popupSubmit = popupSubmit;
     this._popup = document.querySelector(this._popupSelector);
-    this._form = this._popup.querySelector('.popup__form');
+    this._popupForm = this._popup.querySelector('.popup__form');
+    this._inputsList = this._popup.querySelectorAll('.popup__input');
+    this._saveButton = this._popup.querySelector('.popup__save-btn');
   }
 
-  // возвращение значений для заполнения карточки или профиля
   _getInputValues() {
     this._formValues = {};
-
-    this._popup
-      .querySelectorAll('.popup__input')
-      .forEach((item) => (this._formValues[item.name] = item.value));
+    this._inputsList.forEach((input) => (this._formValues[input.name] = input.value));
     return this._formValues;
   }
 
   setEventListeners() {
     super.setEventListeners();
-    this._form.addEventListener('submit', (evt) => {
+    this._popupForm.addEventListener('submit', (evt) => {
       evt.preventDefault();
-      this._popupSubmit(this._getInputValues());
+      const initialText = this._saveButton.textContent;
+      this._popupSubmit(this._getInputValues(), this._saveButton, initialText);
     });
   }
 
-  // reset -- сбрасывает стандартные значения всем элементам формы
   close() {
     super.close();
-    this._form.reset();
+    this._popupForm.reset();
   }
 }

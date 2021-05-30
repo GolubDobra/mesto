@@ -1,21 +1,20 @@
 export class UserInfo {
-  constructor({ nameSelector, descriptionSelector }) {
-    this._name = document.querySelector(nameSelector);
-    this._descriptions = document.querySelector(descriptionSelector);
+  constructor({ nameUserSelector, statusUserSelector }) {
+    this._name = document.querySelector(nameUserSelector);
+    this._status = document.querySelector(statusUserSelector);
   }
 
   // получаем имя и описание профиля
   getUserInfo() {
     const userInfo = {};
     userInfo.name = this._name.textContent;
-    userInfo.descriptions = this._descriptions.textContent;
-
+    userInfo.status = this._status.textContent;
     return userInfo;
   }
 
   // заполняем имя и описание профиля
-  setUserInfo(userNameInput, userStatusInput) {
-    this._name.textContent = userNameInput;
-    this._descriptions.textContent = userStatusInput;
+  setUserInfo(userNameInInput, userStatusInInput) {
+    this._name.textContent = userNameInInput;
+    this._status.textContent = userStatusInInput;
   }
 }

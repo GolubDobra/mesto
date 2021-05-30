@@ -1,52 +1,64 @@
-// import { openPopup } from './index.js';
-
 // класс для создания карточек
 export class Card {
-  constructor(element, templateSelector, { handleCardClick }) {
-    this._name = element.cardName;
-    this._templateSelector = templateSelector;
-    this._link = element.cardUrl;
-    this._handleCardClick = handleCardClick;
+  constructor(element, cardTemplate, { handleClickOnCard, handleClickToDel, counterLikes }) {
+    this._card = element;
+    this._cardTemplate = cardTemplate;
+    this._newCardElement = this._cardTemplate.querySelector('.element');
+    this._handleClickOnCard = handleClickOnCard;
+    this._handleClickToDel = handleClickToDel;
+    this._counterLikes = counterLikes;
   }
 
   _getTemplate() {
-    const cardElement = document.querySelector(this._templateSelector).content.cloneNode(true);
-    return cardElement;
+    if (this._card.owner._id !== '60b2c20bf86a4f004c1c3820') {
+      const cardElement = this._newCardElement.cloneNode(true);
+      cardElement.querySelector('.card__del-button').remove();
+      return cardElement;
+    } else {
+      const cardElement = this._newCardElement.cloneNode(true);
+
+      return cardElement;
+    }
   }
+
+  //
+  _likesCounterForCard = (likeBtn) => {
+    likeBtn.classList.toggle('element__like_active');
+    this._counterLikes();
+  };
+
   generateCard() {
     this._element = this._getTemplate();
-
-    this._setEventListeners(this._element);
-    this._element.querySelector('.elements__card-name').textContent = this._name;
-    this._element.querySelector('.elements__card-name').alt = this._name;
-    this._element.querySelector('.elements__card-image').src = this._link;
-
+    this._placeWithImage = this._element.querySelector('.element__image');
+    this._placeWithCaption = this._element.querySelector('.element__name');
+    this._placeLikeSymbol = this._element.querySelector('.element__like');
+    this._placeBasketSymbol = this._element.querySelector('.card__del-button');
+    this._setEventListeners();
+    this._placeWithImage.src = this._card.link;
+    this._placeWithCaption.textContent = this._card.name;
+    this._placeWithImage.alt = this._card.name;
+    this._card.likes.forEach((user) => {
+      if (user._id == '60b2c20bf86a4f004c1c3820') {
+        this._placeLikeSymbol.classList.add('element__like_active');
+      }
+    });
     return this._element;
   }
 
   // Добавление/удаление лайка карточке
-  _setEventListeners(elem) {
-    this._element.querySelector('.elements__card-image').addEventListener('click', () => {
-      this._handleCardClick();
+  _setEventListeners() {
+    this._placeWithImage.addEventListener('click', () => {
+      this._handleClickOnCard();
     });
 
-    elem.querySelector('.elements__card-like').addEventListener('click', (evt) => {
-      evt.target.classList.toggle('elements__card-like_active');
+    this._placeLikeSymbol.addEventListener('click', () => {
+      this._likesCounterForCard(this._placeLikeSymbol);
     });
 
-    elem.querySelector('.elements__trash-button').addEventListener('click', (evt) => {
-      evt.target.parentElement.remove();
-    });
-
-    // elem.querySelector('.elements__card-image').addEventListener('click', (evt) => {
-    //   // openPopup(openFullImage);
-    //   // document.addEventListener('keydown', closePopupByEsc);
-    //   // openFullImage.addEventListener('click', closePopupByOverlay);
-    //   // openFullImage.classList.add('popup_opened');
-    //   // document.querySelector('.root').setAttribute('style', 'overflow: hidden');
-    //   // fullImage.src = this._link;
-    //   // fullImageName.textContent = this._name;
-    //   // fullImageName.alt = this._name;
-    // });
+    if (this._placeBasketSymbol) {
+      this._placeBasketSymbol.addEventListener('click', (evt) => {
+        this._handleClickToDel(evt);
+      });
+    }
   }
 }
