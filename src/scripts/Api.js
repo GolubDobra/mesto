@@ -8,10 +8,7 @@ export class Api {
     return fetch(`${this._url}/users/me`, {
       headers: this._headers,
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`error: ${res.statusText}`);
+      return this._getResponseData(res);
     });
   }
 
@@ -19,10 +16,7 @@ export class Api {
     return fetch(`${this._url}/cards`, {
       headers: this._headers,
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`error: ${res.statusText}`);
+      return this._getResponseData(res);
     });
   }
 
@@ -35,11 +29,7 @@ export class Api {
         about: status,
       }),
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(`error: ${res.status}`);
-      }
+      return this._getResponseData(res);
     });
   }
 
@@ -52,11 +42,7 @@ export class Api {
         link: url,
       }),
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(`error: ${res.status}`);
-      }
+      return this._getResponseData(res);
     });
   }
 
@@ -68,11 +54,7 @@ export class Api {
         avatar: url,
       }),
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(`error: ${res.status}`);
-      }
+      return this._getResponseData(res);
     });
   }
 
@@ -81,10 +63,7 @@ export class Api {
       method: 'DELETE',
       headers: this._headers,
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`error: ${res.statusText}`);
+      return this._getResponseData(res);
     });
   }
 
@@ -93,10 +72,7 @@ export class Api {
       method: 'PUT',
       headers: this._headers,
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`error: ${res.statusText}`);
+      return this._getResponseData(res);
     });
   }
 
@@ -105,10 +81,14 @@ export class Api {
       method: 'DELETE',
       headers: this._headers,
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`error: ${res.statusText}`);
+      return this._getResponseData(res);
     });
+  }
+
+  _getResponseData(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`error: ${res.status}`);
   }
 }

@@ -1,7 +1,8 @@
 export class UserInfo {
-  constructor({ nameUserSelector, statusUserSelector }) {
+  constructor({ nameUserSelector, statusUserSelector, avatarUserSelector }) {
     this._name = document.querySelector(nameUserSelector);
     this._status = document.querySelector(statusUserSelector);
+    this._avatar = document.querySelector(avatarUserSelector);
   }
 
   // получаем имя и описание профиля
@@ -16,5 +17,9 @@ export class UserInfo {
   setUserInfo(userNameInInput, userStatusInInput) {
     this._name.textContent = userNameInInput;
     this._status.textContent = userStatusInInput;
+  }
+
+  setUserAvatar(userAvatarInInput) {
+    this._avatar.src = userAvatarInInput;
   }
 }

@@ -8,7 +8,8 @@ export class PopupWithSubmit extends Popup {
   open(handleApi) {
     super.open();
     this._handleApi = handleApi;
-    document.addEventListener('keydown', this._handleEscClose);
+    this._saveButton.addEventListener('click', this._handleApi);
+    // document.addEventListener('keydown', this._handleEscClose);
   }
 
   close() {

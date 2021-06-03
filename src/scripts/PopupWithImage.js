@@ -12,6 +12,6 @@ export class PopupWithImage extends Popup {
     this._bigFoto.src = link;
     this._bigCaption.textContent = name;
     this._bigFoto.alt = name;
-    super.setEventListeners();
+    super.setEventListeners(); // без этого не работает закрытие по крестику и оверлею :(
   }
 }

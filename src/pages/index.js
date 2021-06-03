@@ -12,6 +12,8 @@ import './index.css';
 // токен и url для авторизации
 const token = '0a7c4926-ca88-44b6-9ff4-20890c743148';
 const url = 'https://mesto.nomoreparties.co/v1/cohort-24';
+export const id = '60b2c20bf86a4f004c1c3820';
+export const myId = '9815cdd06930a480b6ed7994';
 const likeCounter = '.element__like-counter';
 const buttonSubmit = document.querySelector('.popup__save-btn_confirm');
 const userAvatar = document.querySelector('.profile__avatar');
@@ -46,6 +48,7 @@ const popupWithSubmit = new PopupWithSubmit('.popup_type_submit', buttonSubmit);
 const userInfo = new UserInfo({
   nameUserSelector: '.profile__info-name',
   statusUserSelector: '.profile__info-status',
+  avatarUserSelector: '.profile__avatar',
 });
 
 const addCardFormValidator = new FormValidator(validationConfig, addForm);
@@ -81,19 +84,27 @@ const api = new Api({
   },
 });
 
-api
-  .getUser() //получение информации о юзере
+// api
+//   .getUser() //получение информации о юзере
+//   .then((res) => {
+//     userInfo.setUserInfo(res.name, res.about, res.avatar);
+//     // userAvatar.src = res.avatar;
+//   })
+//   .catch((err) => console.log(err));
+
+Promise.all([api.getUser(), api.getCards()])
   .then((res) => {
-    userInfo.setUserInfo(res.name, res.about);
-    userAvatar.src = res.avatar;
+    userInfo.setUserInfo(res[0].name, res[0].about);
+    userInfo.setUserAvatar(res[0].avatar);
+    section.renderItems(res[1]);
   })
   .catch((err) => console.log(err));
 
-api
-  .getCards() // рендер стартовых карточек
-  .then((dataCardList) => {
-    section.renderItems(dataCardList);
-  });
+// api
+//   .getCards() // рендер стартовых карточек
+//   .then((dataCardList) => {
+//     section.renderItems(dataCardList);
+//   });
 
 //создание карточки
 const createCard = (dataCard) => {
@@ -104,16 +115,17 @@ const createCard = (dataCard) => {
     handleClickToDel() {
       const handleApi = () => {
         api
-          .deleteCard(card._data._id)
+          .deleteCard(card._card._id)
           .then(() => {
-            card._element.remove();
-            popupWithSubmit.close();
+            card.deleteCard(card._element, popupWithSubmit);
+            // card._element.remove();
+            // popupWithSubmit.close();
           })
           .catch((err) => console.log(err));
       };
       popupWithSubmit.open(handleApi);
-      popupWithSubmit.setEventListeners();
-      buttonSubmit.addEventListener('click', handleApi);
+      // popupWithSubmit.setEventListeners();
+      // buttonSubmit.addEventListener('click', handleApi);
     },
 
     // подсчет кол-ва лайков
@@ -122,14 +134,18 @@ const createCard = (dataCard) => {
         api
           .likeCard(dataCard._id)
           .then((res) => {
-            cardElement.querySelector(likeCounter).textContent = res.likes.length;
+            card.likeCards(card._element, likeCounter, res.likes.length);
+            // card.showLikes(res.likes.length, likeCounter);
+            // cardElement.querySelector(likeCounter).textContent = res.likes.length;
           })
           .catch((err) => console.log(err));
       } else {
         api
           .delCardLike(dataCard._id)
           .then((res) => {
-            cardElement.querySelector(likeCounter).textContent = res.likes.length;
+            card.likeCards(card._element, likeCounter, res.likes.length);
+            // card.showLikes(res.likes.length, likeCounter);
+            // cardElement.querySelector(likeCounter).textContent = res.likes.length;
           })
           .catch((err) => console.log(err));
       }
@@ -158,8 +174,11 @@ const popupWithFormAdd = new PopupWithForm({
       .saveNewCard({ name: formValues.name, url: formValues.link })
       .then((dataCard) => {
         section.renderItems([dataCard]);
-        loadingText(false, saveButton, initialText);
+        // loadingText(false, saveButton, initialText);
         popupWithFormAdd.close();
+      })
+      .finally(() => {
+        loadingText(false, saveButton, initialText);
       })
       .catch((err) => console.log(err));
   },
@@ -173,8 +192,11 @@ const popupWithFormUser = new PopupWithForm({
       .updateProfile({ name: formValues.name, status: formValues.status })
       .then((userData) => {
         userInfo.setUserInfo(userData.name, userData.about);
-        loadingText(false, saveButton, initialText);
+        // loadingText(false, saveButton, initialText);
         popupWithFormUser.close();
+      })
+      .finally(() => {
+        loadingText(false, saveButton, initialText);
       })
       .catch((err) => console.log(err));
   },
@@ -187,9 +209,13 @@ const popupWithFormAvatar = new PopupWithForm({
     api
       .newPhotoAvatar(formValues.link)
       .then((res) => {
-        userAvatar.src = res.avatar;
-        loadingText(false, saveButton, initialText);
+        userInfo.setUserAvatar(res.avatar);
+        // userAvatar.src = res.avatar;
+        // loadingText(false, saveButton, initialText);
         popupWithFormAvatar.close();
+      })
+      .finally(() => {
+        loadingText(false, saveButton, initialText);
       })
       .catch((err) => console.log(err));
   },
@@ -209,6 +235,7 @@ avatarEdit.addEventListener('click', () => {
   popupWithFormAvatar.open();
 });
 
+popupWithSubmit.setEventListeners();
 popupWithFormAdd.setEventListeners();
 popupWithFormUser.setEventListeners();
 popupWithFormAvatar.setEventListeners();
