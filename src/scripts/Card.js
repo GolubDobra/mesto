@@ -1,5 +1,5 @@
 // класс для создания карточек
-import { myId } from '../pages/index';
+// import { myId } from '../pages/index';
 export class Card {
   constructor(element, cardTemplate, { handleClickOnCard, handleClickToDel, counterLikes }) {
     this._card = element;
@@ -10,21 +10,12 @@ export class Card {
     this._counterLikes = counterLikes;
   }
 
-  deleteCard(elementForDel, popupWithSubmit) {
+  deleteCard(elementForDel) {
     elementForDel.remove();
-    popupWithSubmit.close();
   }
 
   _getTemplate() {
-    if (this._card.owner._id !== myId) {
-      const cardElement = this._newCardElement.cloneNode(true);
-      // cardElement.querySelector('.card__del-button').remove();
-      return cardElement;
-    } else {
-      const cardElement = this._newCardElement.cloneNode(true);
-
-      return cardElement;
-    }
+    return this._newCardElement.cloneNode(true);
   }
 
   //
@@ -33,7 +24,7 @@ export class Card {
     this._counterLikes();
   };
 
-  generateCard() {
+  generateCard(myId) {
     this._element = this._getTemplate();
     this._placeWithImage = this._element.querySelector('.element__image');
     this._placeWithCaption = this._element.querySelector('.element__name');
@@ -53,8 +44,11 @@ export class Card {
       if (user._id === myId) {
         this._placeLikeSymbol.classList.add('element__like_active');
       }
-      this._placeBasketSymbol.remove();
     });
+
+    if (this._card.owner._id !== myId) {
+      this._placeBasketSymbol.remove();
+    }
 
     return this._element;
   }

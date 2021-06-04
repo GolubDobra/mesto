@@ -12,8 +12,7 @@ import './index.css';
 // токен и url для авторизации
 const token = '0a7c4926-ca88-44b6-9ff4-20890c743148';
 const url = 'https://mesto.nomoreparties.co/v1/cohort-24';
-export const id = '60b2c20bf86a4f004c1c3820';
-export const myId = '9815cdd06930a480b6ed7994';
+let myId;
 const likeCounter = '.element__like-counter';
 const buttonSubmit = document.querySelector('.popup__save-btn_confirm');
 const userAvatar = document.querySelector('.profile__avatar');
@@ -43,8 +42,11 @@ const validationConfig = {
   openButton: Array.from(document.querySelectorAll('.profile__click')),
 };
 
+const popup = document.querySelector('.popup_type_submit');
+const popupForm = popup.querySelector('.popup__form');
+
 const popupWithImage = new PopupWithImage('.popup_type_photo');
-const popupWithSubmit = new PopupWithSubmit('.popup_type_submit', buttonSubmit);
+const popupWithSubmit = new PopupWithSubmit('.popup_type_submit', popupForm);
 const userInfo = new UserInfo({
   nameUserSelector: '.profile__info-name',
   statusUserSelector: '.profile__info-status',
@@ -84,27 +86,14 @@ const api = new Api({
   },
 });
 
-// api
-//   .getUser() //получение информации о юзере
-//   .then((res) => {
-//     userInfo.setUserInfo(res.name, res.about, res.avatar);
-//     // userAvatar.src = res.avatar;
-//   })
-//   .catch((err) => console.log(err));
-
 Promise.all([api.getUser(), api.getCards()])
   .then((res) => {
+    myId = res[0]._id;
     userInfo.setUserInfo(res[0].name, res[0].about);
     userInfo.setUserAvatar(res[0].avatar);
     section.renderItems(res[1]);
   })
   .catch((err) => console.log(err));
-
-// api
-//   .getCards() // рендер стартовых карточек
-//   .then((dataCardList) => {
-//     section.renderItems(dataCardList);
-//   });
 
 //создание карточки
 const createCard = (dataCard) => {
@@ -113,13 +102,13 @@ const createCard = (dataCard) => {
       popupWithImage.open(dataCard.link, dataCard.name);
     },
     handleClickToDel() {
-      const handleApi = () => {
+      const handleApi = (evt) => {
+        evt.preventDefault();
         api
           .deleteCard(card._card._id)
           .then(() => {
             card.deleteCard(card._element, popupWithSubmit);
-            // card._element.remove();
-            // popupWithSubmit.close();
+            popupWithSubmit.close();
           })
           .catch((err) => console.log(err));
       };
@@ -151,7 +140,7 @@ const createCard = (dataCard) => {
       }
     },
   });
-  const cardElement = card.generateCard();
+  const cardElement = card.generateCard(myId);
   return cardElement;
 };
 
