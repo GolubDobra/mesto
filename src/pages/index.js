@@ -66,16 +66,6 @@ const section = new Section(
   },
   '.elements',
 );
-// const cardSection = new Section(
-//   {
-//     // items: initialCards,
-//     renderer: (itemWithData) => {
-//       const cardElement = createCard(itemWithData);
-//       cardSection.addItem(cardElement);
-//     },
-//   },
-//   '.elements',
-// );
 
 // new api
 const api = new Api({
@@ -102,8 +92,7 @@ const createCard = (dataCard) => {
       popupWithImage.open(dataCard.link, dataCard.name);
     },
     handleClickToDel() {
-      const handleApi = (evt) => {
-        evt.preventDefault();
+      const handleApi = () => {
         api
           .deleteCard(card._card._id)
           .then(() => {
@@ -113,8 +102,6 @@ const createCard = (dataCard) => {
           .catch((err) => console.log(err));
       };
       popupWithSubmit.open(handleApi);
-      // popupWithSubmit.setEventListeners();
-      // buttonSubmit.addEventListener('click', handleApi);
     },
 
     // подсчет кол-ва лайков
@@ -124,8 +111,6 @@ const createCard = (dataCard) => {
           .likeCard(dataCard._id)
           .then((res) => {
             card.likeCards(card._element, likeCounter, res.likes.length);
-            // card.showLikes(res.likes.length, likeCounter);
-            // cardElement.querySelector(likeCounter).textContent = res.likes.length;
           })
           .catch((err) => console.log(err));
       } else {
@@ -133,8 +118,6 @@ const createCard = (dataCard) => {
           .delCardLike(dataCard._id)
           .then((res) => {
             card.likeCards(card._element, likeCounter, res.likes.length);
-            // card.showLikes(res.likes.length, likeCounter);
-            // cardElement.querySelector(likeCounter).textContent = res.likes.length;
           })
           .catch((err) => console.log(err));
       }
@@ -146,7 +129,6 @@ const createCard = (dataCard) => {
 
 // Имитация загрузки на сервер...
 function loadingText(isLoading, saveButton, initialText) {
-  /////////////////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   if (isLoading) {
     saveButton.textContent = 'Сохранение...';
   } else {
@@ -163,7 +145,6 @@ const popupWithFormAdd = new PopupWithForm({
       .saveNewCard({ name: formValues.name, url: formValues.link })
       .then((dataCard) => {
         section.renderItems([dataCard]);
-        // loadingText(false, saveButton, initialText);
         popupWithFormAdd.close();
       })
       .finally(() => {
@@ -181,7 +162,6 @@ const popupWithFormUser = new PopupWithForm({
       .updateProfile({ name: formValues.name, status: formValues.status })
       .then((userData) => {
         userInfo.setUserInfo(userData.name, userData.about);
-        // loadingText(false, saveButton, initialText);
         popupWithFormUser.close();
       })
       .finally(() => {
@@ -199,8 +179,6 @@ const popupWithFormAvatar = new PopupWithForm({
       .newPhotoAvatar(formValues.link)
       .then((res) => {
         userInfo.setUserAvatar(res.avatar);
-        // userAvatar.src = res.avatar;
-        // loadingText(false, saveButton, initialText);
         popupWithFormAvatar.close();
       })
       .finally(() => {
